@@ -1,0 +1,44 @@
+<div
+  class="rounded-2xl w-[30vw] w-min-[0%] w-max-[17vw] h-min-[0%] h-max-[100%] h-[88vh] bg-white z-50 relative"
+>
+  <span
+    class="w-full text-cyan-500 flex text-18 justify-center text-xl font-semibold"
+  >
+    Histórico
+  </span>
+  <div class="flex justify-between">
+    <span
+      id="correct"
+      class="cursor-pointer w-full flex text-18 justify-center"
+      [ngClass]="type === 'success'? 'active': ''"
+      (click)="setType('success')"
+    >
+      {{'Corretos('.concat(getByType(listHistory,
+      'success').length.toString()).concat(')') }}
+    </span>
+    <span
+      id="incorrect"
+      class="cursor-pointer w-full flex text-18 justify-center"
+      [ngClass]="type === 'error'? 'active': ''"
+      (click)="setType('error')"
+    >
+      {{'Incorretos('.concat(getByType(listHistory,
+      'error').length.toString()).concat(')') }}
+    </span>
+  </div>
+  <div class="w-full border-y-[1px] border-cyan-400 border-solid"></div>
+
+  <div class="overflow-auto">
+    <div
+      class="flex flex-col"
+      *ngFor="let item of getByType(listHistory,type ); let i = index"
+    >
+      <app-search-item
+        [item]="item"
+        [listHistoryGoogle]="listHistoryGoogle"
+        (onDeleteItem)="onDeleteItem(item)"
+        (onSearchItem)="onSearchItem(item.cep)"
+      ></app-search-item>
+    </div>
+  </div>
+</div>

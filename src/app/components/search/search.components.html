@@ -1,0 +1,18 @@
+<div class="items-center flex w-[65vw] w-min-[0%] w-max-[17vw] z-50 relative" style="background-color: transparent !important;">
+  <input
+    id="inputSearch"
+    type="text"
+    placeholder="Pesquisar cep..."
+    (keypress)="onPress($event)"
+    [value]="inputText"
+    (input)="onInput($event)"
+  />
+  <img
+    class="absolute cursor-pointer"
+    style="right: 15px; height: 23px"
+    src="assets/search.png"
+    
+    alt="search"
+    (click)="onPressIcon()"
+  />
+</div>
