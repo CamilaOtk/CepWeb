@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { xorBy } from 'lodash';
 import { searchZipCode } from 'src/app/service/api/viacep';
 import { searchZipCode as searchZipCodeGoogle } from 'src/app/service/api/google';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,27 @@ import { searchZipCode as searchZipCodeGoogle } from 'src/app/service/api/google
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  constructor(private toastr: NgToastService) {}
   title = 'CepWeb';
   objZipCode: any = null;
   objZipCodeGoogle: any = null;
   listHistory: any[] = [];
   listHistoryGoogle: any[] = [];
   activeLoading = false;
+  activeCards = true;
+  visibleCards() {
+    this.activeCards = !this.activeCards;
+  }
+  showError() {
+    this.toastr.error({
+      detail: 'Cep invalido',
+      summary: 'Digite um cep válido. Ex: 00000-000',
+      position: 'tr',
+      sticky: true,
+      duration: 500000000000,
+      type: '',
+    });
+  }
 
   ngOnInit() {
     const searchs = JSON.parse(
@@ -51,12 +67,13 @@ export class AppComponent {
   }) {
     this.activeLoading = true;
     const response = await searchZipCode(search);
-    console.log('response', response)
+    console.log('response', response);
     if (response.status === 200) {
       this.objZipCode = { ...response.data, type: 'success' };
       const responseGoogle = await searchZipCodeGoogle(search);
       this.objZipCodeGoogle = responseGoogle.data?.results[0];
     } else {
+      this.showError();
       this.objZipCode = {
         cep: search,
         type: 'error',

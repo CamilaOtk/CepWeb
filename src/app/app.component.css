@@ -1,0 +1,6 @@
+#toast {
+    height: 100px !important;
+}
+#toast > div {
+    height: 100px !important;
+}

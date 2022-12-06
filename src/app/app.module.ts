@@ -5,6 +5,7 @@ import { SearchComponents } from './components/search/search.components';
 import { LeftmenuComponents } from './components/left-menu/left-menu.components';
 import { MapComponent } from './components/google-map/map.components';
 import { SearchItemComponents } from './components/left-menu/components/search-item/search-item.components';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -13,9 +14,12 @@ import { SearchItemComponents } from './components/left-menu/components/search-i
     LeftmenuComponents,
     MapComponent,
     SearchItemComponents,
+    
   ],
-  imports: [BrowserModule],
+  imports: [NgToastModule,
+    BrowserModule],
   providers: [],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}

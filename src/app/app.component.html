@@ -1,15 +1,24 @@
 <div class="w-full h-full flex relative">
+  <lib-ng-toast id="toast"></lib-ng-toast>
   <div class="flex h-full relative w-full">
     <div
-      class="absolute top-0 bottom-0 left-0 right-0 h-[100vh] py-12 px-6 flex justify-between"
+      class="items-start absolute top-0 bottom-0 left-0 right-0 h-[100vh] py-24 px-6 flex justify-between"
     >
-      <app-left-menu
-        [listHistory]="this.listHistory"
-        [listHistoryGoogle]="this.listHistoryGoogle"
-        (deleteItemStorage)="deleteItemStorage($event)"
-        (onSearchApi)="onSearchApi($event)"
-      ></app-left-menu>
-      <app-search (onSearch)="onSearchApi($event)"></app-search>
+      <div class="h-full flex w-full" [ngClass]="activeCards ? '' : 'hidden'">
+        <app-left-menu
+          [listHistory]="this.listHistory"
+          [listHistoryGoogle]="this.listHistoryGoogle"
+          (deleteItemStorage)="deleteItemStorage($event)"
+          (onSearchApi)="onSearchApi($event)"
+        ></app-left-menu>
+        <app-search (onSearch)="onSearchApi($event)"></app-search>
+      </div>
+      <div></div>
+      <div class="cursor-pointer flex p-2 z-30 rounded-full bg-white">
+        <button class="button-serach flex text-black" (click)="visibleCards()">
+          <i class="material-icons">menu</i>
+        </button>
+      </div>
     </div>
     <app-google-map [objZipCodeGoogle]="this.objZipCodeGoogle"></app-google-map>
   </div>
